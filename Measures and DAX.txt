@@ -1,0 +1,24 @@
+Page - 2 Visuals
+
+New Column
+
+Revenue = 'Online Retail'[Quantity]*'Online Retail'[UnitPrice]
+
+
+Page - 3 Visuals
+
+New Measure
+
+Pareto % = 
+var totalrevenue = CALCULATE(SUM('Online Retail'[Revenue]),ALLSELECTED('Online Retail'))
+VAR currentrevenue = SUM('Online Retail'[Revenue])
+var sumtable = 
+SUMMARIZE(ALLSELECTED('Online Retail'),
+            'Online Retail'[Country],
+            "Revenue",
+             SUM('Online Retail'[Revenue] ))
+var cumilativesum = 
+             SUMX(FILTER(sumtable,[Revenue] >= currentrevenue) , [Revenue])
+
+return
+cumilativesum/totalrevenue
